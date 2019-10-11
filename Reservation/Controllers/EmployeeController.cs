@@ -11,7 +11,7 @@ using Service;
 
 namespace Reservation.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]/[action]")] 
     [ApiController]
     public class EmployeeController : ControllerBase
     {
