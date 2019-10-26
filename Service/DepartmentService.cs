@@ -1,9 +1,7 @@
 ﻿using DataAccess;
 using Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Service
 {
@@ -29,14 +27,17 @@ namespace Service
         }
         public void Update(Department department)
         {
-            var deparmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == department.Id);
-            deparmentObject.Name = department.Name;
+            var departmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == department.Id);
+            if(departmentObject == null) return;
+             departmentObject.Name = department.Name;
+             departmentObject.BranchId = department.BranchId;
             _context.SaveChanges();
         }
         public void Delete(int id)
         {
-            var deparmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == id);
-            _context.Departments.Remove(deparmentObject);
+            var departmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == id);
+            if (departmentObject == null) return;
+            _context.Departments.Remove(departmentObject);
             _context.SaveChanges();
         }
     }

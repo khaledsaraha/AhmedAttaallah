@@ -6,12 +6,12 @@ using Service;
 
 namespace Reservation.Controllers
 {
-    public class EmployeeController : BaseController
+    public class BranchController : BaseController
     {
-        private readonly EmployeeService _service;
-        public EmployeeController(Context context)
+        private readonly BranchService _service;
+        public BranchController(Context context)
         {
-            _service = new EmployeeService(context);
+            _service = new BranchService(context);
         }
         [HttpGet]
         public IActionResult GetAll()
@@ -24,15 +24,15 @@ namespace Reservation.Controllers
             return Ok(_service.Get(id));
         }
         [HttpPost]
-        public IActionResult Add(Employee employee)
+        public IActionResult Add(Branch branch)
         {
-            _service.Add(employee);
+            _service.Add(branch);
             return Ok();
         }
         [HttpPut]
-        public IActionResult Update(Employee employee)
+        public IActionResult Update(Branch branch)
         {
-            _service.Update(employee);
+            _service.Update(branch);
             return Ok();
         }
         [HttpDelete]
@@ -42,5 +42,4 @@ namespace Reservation.Controllers
             return Ok();
         }
     }
-    
 }

@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20191011125611_AddDepartment.Designer.cs" />
     <Compile Remove="Migrations\20191011130048_AddDepartment.cs" />
     <Compile Remove="Migrations\20191011130048_AddDepartment.Designer.cs" />
+    <Compile Remove="Migrations\20191025100153_AddBranch.cs" />
+    <Compile Remove="Migrations\20191025100153_AddBranch.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
