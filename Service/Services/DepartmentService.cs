@@ -3,7 +3,7 @@ using Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Service
+namespace Service.Services
 {
     public class DepartmentService
     {

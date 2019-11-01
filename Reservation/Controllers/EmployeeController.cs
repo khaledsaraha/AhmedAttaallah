@@ -2,7 +2,7 @@
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
-using Service;
+using Service.Services;
 
 namespace Reservation.Controllers
 {

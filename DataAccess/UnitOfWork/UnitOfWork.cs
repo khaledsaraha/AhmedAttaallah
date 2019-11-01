@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,15 +9,14 @@ namespace DataAccess.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext _context;
-
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(DbContext context,IBranchRepository branchRepository)
         {
             _context = context;
-           // Courses = new CourseRepository(_context);
+            BranchRepository = branchRepository;
         }
 
-        //public ICourseRepository Courses { get; private set; }
-       
+        public IBranchRepository BranchRepository { get; private set; }
+
         public int SaveChanges()
         {
             return _context.SaveChanges();

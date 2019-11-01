@@ -1,17 +1,16 @@
-﻿using DataAccess;
-using Entities;
+﻿using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
-using Service;
+using Service.Interface;
 
 namespace Reservation.Controllers
 {
     public class BranchController : BaseController
     {
-        private readonly BranchService _service;
-        public BranchController(Context context)
+        private readonly IBranchService _service;
+        public BranchController(IBranchService service)
         {
-            _service = new BranchService(context);
+            _service = service;
         }
         [HttpGet]
         public IActionResult GetAll()

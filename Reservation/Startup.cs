@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Interface;
+using DataAccess.Repositories;
+using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Service.Interface;
+using Service.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Reservation
@@ -38,6 +43,9 @@ namespace Reservation
             var connection = Configuration.GetConnectionString("context");
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
             services.AddScoped<DbContext, Context>();
+            services.AddTransient<IBranchRepository, BranchRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IBranchService,BranchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
