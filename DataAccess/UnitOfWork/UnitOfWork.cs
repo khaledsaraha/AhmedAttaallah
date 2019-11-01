@@ -9,14 +9,15 @@ namespace DataAccess.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext _context;
-        public UnitOfWork(DbContext context,IBranchRepository branchRepository)
+        public UnitOfWork(DbContext context,IBranchRepository branchRepository , IEmployRepository employRepository)
         {
             _context = context;
             BranchRepository = branchRepository;
+            EmployRepository = employRepository;
         }
 
         public IBranchRepository BranchRepository { get; private set; }
-
+        public IEmployRepository EmployRepository { get; private set; } 
         public int SaveChanges()
         {
             return _context.SaveChanges();
@@ -26,5 +27,6 @@ namespace DataAccess.UnitOfWork
         {
             _context.Dispose();
         }
+
     }
 }

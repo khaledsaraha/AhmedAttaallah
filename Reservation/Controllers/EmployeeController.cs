@@ -2,16 +2,17 @@
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
+using Service.Interface;
 using Service.Services;
 
 namespace Reservation.Controllers
 {
     public class EmployeeController : BaseController
     {
-        private readonly EmployeeService _service;
-        public EmployeeController(Context context)
+        private readonly IEmployService _service;
+        public EmployeeController(IEmployService service)
         {
-            _service = new EmployeeService(context);
+            _service = service;
         }
         [HttpGet]
         public IActionResult GetAll()
