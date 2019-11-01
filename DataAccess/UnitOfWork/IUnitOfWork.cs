@@ -8,6 +8,7 @@ namespace DataAccess.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         IBranchRepository BranchRepository { get; }
+        IDepartmentRepository DepartmentRepository { get; } 
         int SaveChanges();
     }
 }

@@ -44,8 +44,10 @@ namespace Reservation
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
             services.AddScoped<DbContext, Context>();
             services.AddTransient<IBranchRepository, BranchRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IBranchService,BranchService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
