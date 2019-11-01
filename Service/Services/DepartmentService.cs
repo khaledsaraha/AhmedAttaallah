@@ -1,44 +1,46 @@
 ﻿using DataAccess;
+using DataAccess.UnitOfWork;
 using Entities;
+using Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Service.Services
 {
-    public class DepartmentService
+    public class DepartmentService: IDepartmentService
     {
-        private readonly Context _context;
-        public DepartmentService(Context context)
+        private readonly IUnitOfWork _unitOfWork;
+        public DepartmentService(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
-        public List<Department> GetAll()
+        public IEnumerable<Department> GetAll()
         {
-            return _context.Departments.ToList();
+            return _unitOfWork.DepartmentRepository.GetAll();
         }
         public Department Get(int id)
         {
-            return _context.Departments.SingleOrDefault(dept => dept.Id == id);
+            return _unitOfWork.DepartmentRepository.Get(id);
         }
         public void Add(Department department)
         {
-            _context.Departments.Add(department);
-            _context.SaveChanges();
+            _unitOfWork.DepartmentRepository.Add(department);
+            _unitOfWork.SaveChanges();
         }
         public void Update(Department department)
         {
-            var departmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == department.Id);
+            var departmentObject = _unitOfWork.DepartmentRepository.Get(department.Id);
             if(departmentObject == null) return;
              departmentObject.Name = department.Name;
              departmentObject.BranchId = department.BranchId;
-            _context.SaveChanges();
+            _unitOfWork.SaveChanges();
         }
         public void Delete(int id)
         {
-            var departmentObject = _context.Departments.SingleOrDefault(dept => dept.Id == id);
+            var departmentObject = _unitOfWork.DepartmentRepository.Get(id);
             if (departmentObject == null) return;
-            _context.Departments.Remove(departmentObject);
-            _context.SaveChanges();
+            _unitOfWork.DepartmentRepository.Remove(departmentObject);
+            _unitOfWork.SaveChanges();
         }
     }
 }

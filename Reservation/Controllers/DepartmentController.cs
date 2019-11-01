@@ -1,18 +1,17 @@
-﻿using DataAccess;
-using Entities;
+﻿using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
-using Service.Services;
+using Service.Interface;
 
 namespace Reservation.Controllers
 {
-    
+
     public class DepartmentController : BaseController
     {
-        private readonly DepartmentService _service;
-        public DepartmentController(Context context)
+        private readonly IDepartmentService _service;
+        public DepartmentController(IDepartmentService service)
         {
-            _service = new DepartmentService(context);
+            _service = service;
         }
         [HttpGet]
         public IActionResult GetAll()
