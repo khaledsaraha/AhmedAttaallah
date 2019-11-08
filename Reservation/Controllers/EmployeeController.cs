@@ -1,9 +1,7 @@
-﻿using DataAccess;
-using Entities;
+﻿using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
 using Service.Interface;
-using Service.Services;
 
 namespace Reservation.Controllers
 {

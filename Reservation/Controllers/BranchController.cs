@@ -1,6 +1,7 @@
 ﻿using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Controllers.Base;
+using Service.Dto;
 using Service.Interface;
 
 namespace Reservation.Controllers
@@ -23,13 +24,13 @@ namespace Reservation.Controllers
             return Ok(_service.Get(id));
         }
         [HttpPost]
-        public IActionResult Add(Branch branch)
+        public IActionResult Add(BranchDto branch)
         {
             _service.Add(branch);
             return Ok();
         }
         [HttpPut]
-        public IActionResult Update(Branch branch)
+        public IActionResult Update(BranchDto branch)
         {
             _service.Update(branch);
             return Ok();

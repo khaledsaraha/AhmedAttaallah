@@ -1,45 +1,49 @@
-﻿using DataAccess;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Entities;
-using Microsoft.EntityFrameworkCore;
 using Service.Interface;
 using DataAccess.UnitOfWork;
+using Service.Dto;
+using Service.Services.Base;
 
 namespace Service.Services
 {
-    public class BranchService : IBranchService
+    public class BranchService : BaseService,IBranchService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public BranchService(IUnitOfWork unitOfWork)
+        public BranchService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
-            _unitOfWork = unitOfWork;
+
         }
-        public IEnumerable<Branch> GetAll()
+
+        public IEnumerable<BranchDto> GetAll()
         {
-            return _unitOfWork.BranchRepository.GetAll();
+            var entity = UnitOfWork.BranchRepository.GetAll();
+            return Mapper.Map<IEnumerable<BranchDto>>(entity);
         }
-        public Branch Get(int id)
+        public BranchDto Get(int id)
         {
-            return _unitOfWork.BranchRepository.Get(id);
+            var entity = UnitOfWork.BranchRepository.Get(id);
+            return Mapper.Map<BranchDto>(entity);
         }
-        public void Add(Branch branch)
+        public void Add(BranchDto branch)
         {
-            _unitOfWork.BranchRepository.Add(branch);
-            _unitOfWork.SaveChanges();
+            UnitOfWork.BranchRepository.Add(Mapper.Map<Branch>(branch));
+            UnitOfWork.SaveChanges();
         }
-        public void Update(Branch branchData)
+        public void Update(BranchDto branchData)
         {
-            var branchObject = _unitOfWork.BranchRepository.Get(branchData.Id);
+            var branchObject = UnitOfWork.BranchRepository.Get(branchData.Id);
             if (branchObject != null) branchObject.Name = branchData.Name;
-            _unitOfWork.SaveChanges();
+            UnitOfWork.SaveChanges();
         }
         public void Delete(int id)
         {
-            var branchObject = _unitOfWork.BranchRepository.Get(id);
+            var branchObject = UnitOfWork.BranchRepository.Get(id);
             if (branchObject == null) return;
-            _unitOfWork.BranchRepository.Remove(branchObject);
-            _unitOfWork.SaveChanges();
+            UnitOfWork.BranchRepository.Remove(branchObject);
+            UnitOfWork.SaveChanges();
         }
+
+
     }
 }

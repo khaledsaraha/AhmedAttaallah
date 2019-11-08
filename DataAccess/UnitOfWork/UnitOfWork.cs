@@ -9,8 +9,7 @@ namespace DataAccess.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext _context;
-        public UnitOfWork(DbContext context,IBranchRepository branchRepository,IDepartmentRepository departmentRepository)
-        public UnitOfWork(DbContext context,IBranchRepository branchRepository , IEmployRepository employRepository)
+        public UnitOfWork(DbContext context,IBranchRepository branchRepository , IEmployRepository employRepository, IDepartmentRepository departmentRepository)
         {
             _context = context;
             BranchRepository = branchRepository;
